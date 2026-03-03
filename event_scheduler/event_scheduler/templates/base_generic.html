@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}<title>Event Scheduler</title>{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css?v=2' %}">
+</head>
+<body>
+    <div id="sidebar">
+        {% block sidebar %}
+        <!-- default sidebar content -->
+        {% if user.is_authenticated %}
+            <div id="user-info">
+                <span id="user-account">Welcome: {{ user.get_username }}</span>
+                <span>
+                <form id="logout-form" method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-link">Logout</button>
+                </form>
+                </span>
+            </div>
+        {% endif %}
+        {% endblock %}
+    </div>
+    <div id="content">
+        {% block content %}
+        <!-- default content goes here, or this space will be filled by child templates -->
+        {% endblock %}
+    </div>
+    <!-- potentially a {% block scripts %}{% endblock %} for page-specific JavaScript -->
+</body>
+</html>

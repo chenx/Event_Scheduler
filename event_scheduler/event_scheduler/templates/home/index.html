@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<h1>Welcome to Event Scheduler</h1>
+
+{% for group in user.groups.all %}
+    <p>Your group: {{ group.name }}</p>
+{% endfor %}
+
+{% if can_access_api %}
+<h2>APIs</h2>
+<ul>
+    <li><a href="api/events">api/events</a>
+    <li><a href="api/groups">api/groups</a>
+    <li><a href="api/users">api/users</a>
+</ul>
+{% endif %}
+
+{% if user.is_superuser %}
+<h2>Admin functions</h2>
+<ul>
+    <li><a href="/admin">admin</a>
+</ul>
+{% endif %}
+
+{% else %}
+    <div style="text-align: center;">
+        <h1>Event Scheduler</h1>
+        <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+    </div>
+{% endif %}
+
+{% endblock %}
