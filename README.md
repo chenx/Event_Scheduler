@@ -4,6 +4,8 @@ A Django project to demo the creation of models and APIs in a meeting scheduler.
 
 Use Django REST Framework (DRF) to provide API end points.
 
+User needs to log in to access personal homepage and API endpoints.
+
 Environment:
 - Python 3.14.2
 - DJango 6.0
