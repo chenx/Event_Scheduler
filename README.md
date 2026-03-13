@@ -22,3 +22,21 @@ Environment:
 <img width="634" height="536" alt="image" src="https://github.com/user-attachments/assets/452938e5-c8af-4d1a-acf8-5642f7b6f483" />
 
 Created using https://dbdiagram.io
+
+## Web UI
+
+### 1) homepage
+
+<img width="883" height="675" alt="image" src="https://github.com/user-attachments/assets/1ffddb67-a2a5-4bd3-8034-7ee0bf36d210" />
+
+### 2) agent/agent2: Ask me anything (v2)
+
+<img width="889" height="339" alt="image" src="https://github.com/user-attachments/assets/0c6d0f22-a171-43f1-8f78-b2b4fb56c372" />
+
+### 3) datastore
+
+<img width="906" height="533" alt="image" src="https://github.com/user-attachments/assets/fd8c5ede-9770-45fb-b135-e22b52e0b3a5" />
+
+### 4) events
+
+<img width="903" height="363" alt="image" src="https://github.com/user-attachments/assets/13ded703-f423-4478-a6e3-2a6a62b03bb3" />
