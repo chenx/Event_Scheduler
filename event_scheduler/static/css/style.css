@@ -77,7 +77,4 @@ body {
 .grid-div {
     background: url("/static/image/grid.png") repeat-x;
     background-attachment: fixed;
-    position: fixed;
-    top: 0;
-    width: 100%;
 }
