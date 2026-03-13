@@ -38,13 +38,13 @@ This is a conversational AI agent powered by OpenAI API. It logs the result to t
 
 ### 3) datastore
 <kbd>
-<img width="906" height="533" alt="image" src="https://github.com/user-attachments/assets/fd8c5ede-9770-45fb-b135-e22b52e0b3a5" />
+<img width="906" height="587" alt="image" src="https://github.com/user-attachments/assets/4ff38453-217a-41ef-a75b-f69a62d5112a" />
 </kbd>
 
 ### 4) service/events
 This retrieves data from remote API and displays the data in a table.
 <kbd>
-<img width="903" height="363" alt="image" src="https://github.com/user-attachments/assets/13ded703-f423-4478-a6e3-2a6a62b03bb3" />
+<img width="902" height="356" alt="image" src="https://github.com/user-attachments/assets/d7221f02-61e4-4544-a888-d57f7c623f2c" />
 </kbd>
 
 ### 5) api/events
