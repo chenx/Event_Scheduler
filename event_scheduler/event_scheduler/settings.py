@@ -26,8 +26,16 @@ SECRET_KEY = 'django-insecure-heva55fkiqb9wb*7**irz+n-2u&&wj9j1^x4yzc#y$t8lgbp=e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 
+                 'renaldo-undemonstrational-gullably.ngrok-free.dev']
 
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000',
+                        'https://renaldo-undemonstrational-gullably.ngrok-free.dev/']
+
+# Correctly configure SSL/HTTPS with proxies: If using Nginx, Ngrok or other reverse proxies with SSL, 
+# you may need specific configurations (like SECURE_PROXY_SSL_HEADER) to ensure Django knows the request 
+# is secure and can set the CSRF cookie correctly.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
@@ -39,7 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    # 'rest_framework.authtoken',
+    'agent',
     'api',
+    'service',
 ]
 
 MIDDLEWARE = [
@@ -105,6 +116,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication', # Add other methods if needed
+    ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
@@ -134,5 +149,9 @@ STATICFILES_DIRS = [
 
 AUTH_USER_MODEL = 'api.CustomUser'
 
-# # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/'
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/' # The URL to redirect to after a successful login
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/api-auth/login'
+# LOGOUT_REDIRECT_URL = '/accounts/login/' # Optional: The URL to redirect to after logging out
+# LOGIN_URL = '/accounts/login/' # Optional: The URL to redirect to if a user needs to log in

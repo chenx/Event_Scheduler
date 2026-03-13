@@ -1,0 +1,116 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+{% if owner_name %}
+    <div>
+        <a href="/service/events/">Back to all events</a>
+    </div>
+    <h1>Events for {{owner_name}}</h1>
+{% else %}
+    <div>
+        <a href="/">Back to homepage</a>
+    </div>
+    <h1>Events</h1>
+{% endif %}
+
+From API end point: <a href="https://renaldo-undemonstrational-gullably.ngrok-free.dev/api/events/" target="_new">https://renaldo-undemonstrational-gullably.ngrok-free.dev/api/events/</a>
+
+<table class="event-table">
+    <thead>
+        <tr class="event-header">
+            <td class="event-owner">Owner</td>
+            <td class="event-title">Title</td>
+            <td class="event-save">Action</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in events %}
+            <tr>
+                <td><a href="/service/events/{{event.owner}}">{{ event.owner_name }}</a></td>
+                <td><a href="/service/event/{{event.event_id}}">{{ event.title }}</a></td>
+                <td>
+                {% if event.event_id in data_store_uids %}
+                    <button id="delete_btn_{{event.event_id}}" onclick='deleteItem("{{event.event_id}}")' style="display:block;">Delete from database</button>
+                    <button id="btn_{{event.event_id}}" onclick='saveItem("{{event.event_id}}", "{{event.owner_name}}", "{{event.title}}")' style="display:none;">Save to database</button>
+                {% else %}
+                    <button id="delete_btn_{{event.event_id}}" onclick='deleteItem("{{event.event_id}}")' style="display:none;">Delete from database</button>
+                    <button id="btn_{{event.event_id}}" onclick='saveItem("{{event.event_id}}", "{{event.owner_name}}", "{{event.title}}")' style="display:block;">Save to database</button>
+                {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Include the CSRF token in a script tag for JavaScript access -->
+{% csrf_token %}
+<script>
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    function saveItem(event_id, owner_name, title) {
+        const url = '/service/save-item/'; // The URL mapped in urls.py
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken // Send the CSRF token in the headers
+            },
+            body: JSON.stringify({ event_id: event_id, owner: owner_name, title: title }) // Send data as JSON
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(data.message); // Handle success (e.g., update the UI)
+                document.getElementById('btn_' + event_id).style.display = 'none';
+                document.getElementById('delete_btn_' + event_id).style.display = 'block';
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('Error:', error);
+        });
+    }
+
+    function deleteItem(event_id) {
+        const url = '/service/delete-item/'; // The URL mapped in urls.py
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken // Send the CSRF token in the headers
+            },
+            body: JSON.stringify({ event_id: event_id }) // Send data as JSON
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(data.message); // Handle success (e.g., update the UI)
+                document.getElementById('btn_' + event_id).style.display = 'block';
+                document.getElementById('delete_btn_' + event_id).style.display = 'none';
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('Error:', error);
+        });
+    }
+
+</script>
+
+
+{% else %}
+    <div style="text-align: center;">
+        <h1>Event Scheduler</h1>
+        <li><a href="/api-auth/login/?next={{ request.path }}">Login</a></li>
+        <!-- <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li> -->
+    </div>
+{% endif %}
+
+{% endblock %}

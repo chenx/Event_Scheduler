@@ -1,0 +1,149 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div>
+    <a href="/">Back to homepage</a>
+</div>
+<h1>Datastore</h1>
+
+From sqlite3 table Datastore (<a href="#" onclick="deleteAll();">Delete All</a>).
+<table class="event-table">
+    <thead>
+        <tr class="event-header">
+            <td style="width: 100px;">Event ID</td>
+            <td style="width: 300px;">Title</td>
+            <td style="width: 200px;">Description</td>
+            <td style="width: 200px;">Created at</td>
+            <td style="width: 100px;">Action</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="text" id="newUid" name="uid" style="width: 100px;"/></td>
+            <td><input type="text" id="newTitle" name="title" style="width: 300px;"/></td>
+            <td><input type="text" id="newDesc" name="description" style="width: 200px;"/></td>
+            <td><br/></td>
+            <td>
+                <button onclick='saveItem()'>Add</button>
+            </td>
+        </tr>
+        {% for item in datastore %}
+            <tr>
+                <td>{{ item.uid }}</td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.created_at }}</td>
+                <td>
+                    <button onclick='deleteItem("{{item.id}}")'>Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Include the CSRF token in a script tag for JavaScript access -->
+{% csrf_token %}
+<script>
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    function saveItem(uid, title, description) {
+        const url = '/service/save-datastore-item/'; // The URL mapped in urls.py
+
+        uid = document.getElementById('newUid').value.trim();
+        title = document.getElementById('newTitle').value.trim();
+        desc = document.getElementById('newDesc').value.trim();
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken // Send the CSRF token in the headers
+            },
+            body: JSON.stringify({ uid: uid, title: title, description: desc }) // Send data as JSON
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(data.message); // Handle success (e.g., update the UI)
+                location.reload();
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('Error:', error);
+        });
+    }
+
+    function deleteItem(id) {
+        if (! confirm('Are you sure to delete this entry?')) {
+            return;
+        }
+
+        const url = '/service/delete-datastore-item/'; // The URL mapped in urls.py
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken // Send the CSRF token in the headers
+            },
+            body: JSON.stringify({ id: id }) // Send data as JSON
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // alert(data.message); // Handle success (e.g., update the UI)
+                location.reload();
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('Error:', error);
+        });
+    }
+
+    function deleteAll() {
+        if (! confirm('Are you sure to delete all entries?')) {
+            return;
+        }
+
+        const url = '/service/delete-all-datastore-item/'; // The URL mapped in urls.py
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken // Send the CSRF token in the headers
+            },
+            body: JSON.stringify({}) // Send data as JSON
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // alert(data.message); // Handle success (e.g., update the UI)
+                location.reload();
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('Error:', error);
+        });
+    }
+</script>
+
+
+{% else %}
+    <div style="text-align: center;">
+        <h1>Event Scheduler</h1>
+        <li><a href="/api-auth/login/?next={{ request.path }}">Login</a></li>
+        <!-- <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li> -->
+    </div>
+{% endif %}
+
+{% endblock %}

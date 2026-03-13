@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div>
+    <a href="/">Back to homepage</a>
+</div>
+<h1>Test</h1>
+
+From API end point:
+
+
+
+{% else %}
+    <div style="text-align: center;">
+        <h1>Event Scheduler</h1>
+        <li><a href="/api-auth/login/?next={{ request.path }}">Login</a></li>
+        <!-- <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li> -->
+    </div>
+{% endif %}
+
+{% endblock %}

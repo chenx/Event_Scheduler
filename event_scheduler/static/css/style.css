@@ -23,3 +23,34 @@ body {
 #content {
     padding: 10px;
 }
+
+.event-owner {
+    width: 200px;
+}
+
+.event-title {
+    width: 500px;
+}
+
+.event-header {
+    background-color: orange;
+}
+
+.event-table thead td {
+    padding: 5px;
+}
+
+.event-table tbody td {
+    background-color: #eee;
+    padding: 5px;
+}
+
+/* register form. */
+.login-form-label {
+    display: inline-block;
+    width: 150px;
+}
+
+.login-form-div {
+    height: 30px;
+}

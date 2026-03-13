@@ -1,0 +1,45 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div>
+<!-- users/templates/registration/register.html -->
+<h1>Register</h1>
+<form method="POST">
+    {% csrf_token %}
+    <!-- {{ form.as_p }}
+    <button type="submit">Register</button> -->
+
+    <div class="login-form-div">
+        <label for="id_username" class="login-form-label">Username:</label>
+        <input type="text" name="username" maxlength="30" autofocus required aria-describedby="id_username_helptext" id="id_username">
+        <span class="helptext" id="id_username_helptext"> 30 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+    </div>
+    <div class="login-form-div">
+        <label for="id_email" class="login-form-label">Email address:</label>
+        <input type="email" name="email" required maxlength="254" id="id_email">
+    </div>
+    <div class="login-form-div">
+        <label for="id_first_name" class="login-form-label">First name:</label>
+        <input type="text" name="first_name" maxlength="150" id="id_first_name">
+    </div>
+    <div class="login-form-div">
+        <label for="id_last_name" class="login-form-label">Last name:</label>
+        <input type="text" name="last_name" maxlength="150" id="id_last_name">
+    </div>
+    <div class="login-form-div">
+        <label for="id_password1" class="login-form-label">Password:</label>
+        <input type="password" name="password1" autocomplete="new-password" required aria-describedby="id_password1_helptext" id="id_password1">
+        <span class="helptext" id="id_password1_helptext"> must contain at least 8 characters.</span>
+    </div>  
+    <div class="login-form-div">
+        <label for="id_password2" class="login-form-label">Confirm Password:</label>
+        <input type="password" name="password2" autocomplete="new-password" required aria-describedby="id_password2_helptext" id="id_password2">
+        <span class="helptext" id="id_password2_helptext"></span>
+    </div>
+    <button type="submit">Register</button>
+
+</form>
+</div>
+
+{% endblock %}

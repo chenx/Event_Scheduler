@@ -10,7 +10,26 @@
 {% endfor %}
 
 {% if can_access_api %}
-<h2>APIs</h2>
+<h2>Agents</h2>
+<ul>
+    <li><a href="agent/agent1">agent/agent1: Ask me anything</a>
+    <li><a href="agent/agent2">agent/agent2: Ask me anything (v2)</a>
+</ul>
+{% endif %}
+
+<h2>Remote API Integration</h2>
+<ul>
+    <li><a href="service/test">service/test</a>
+    <li><a href="service/events">service/events</a>
+</ul>
+
+<h2>Local Database</h2>
+<ul>
+    <li><a href="service/datastore">service/datastore</a>
+</ul>
+
+{% if can_access_api %}
+<h2>Local APIs</h2>
 <ul>
     <li><a href="api/events">api/events</a>
     <li><a href="api/groups">api/groups</a>
@@ -28,7 +47,10 @@
 {% else %}
     <div style="text-align: center;">
         <h1>Event Scheduler</h1>
-        <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+        <li><a href="/api-auth/login/?next={{ request.path }}">Login</a> |
+            <a href="/signup/">Sign up</a>
+        </li>
+        <!-- <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li> -->
     </div>
 {% endif %}
 

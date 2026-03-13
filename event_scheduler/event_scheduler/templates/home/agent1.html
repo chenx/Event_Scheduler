@@ -1,0 +1,111 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div>
+    <a href="/">Back to homepage</a>
+</div>
+<h1>Agent 1: Ask me anything</h1>
+<textarea id="question" style="width: 800px; height: 80px; resize: none;"></textarea>
+<div>
+    <button onclick="submitQuestion()">Submit</button>
+    <button onclick="clearQuestion()">Clear</button>
+    Driven by OpenAI API.
+    Answer is saved to database <a href="/service/datastore/" target="_blank">here</a>.
+</div>
+
+<div style="padding-top: 20px; width: 800px;">
+    <div id="info"></div>
+    <div id="errorInfo" style="color:red"></div>
+    <image id="loadingIcon" src="/static/image/loading.gif" style="height: 100px; display: none;"></image>
+</div>
+
+
+{% csrf_token %}
+<script>
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    function submitQuestion() {
+        const url = '/agent/agent1_handler/'; // The URL mapped in urls.py
+        const question = document.getElementById('question').value.trim();
+        if (question === '') {
+            showError('Input is empty')
+            return;
+        }
+        showMessage("please wait ...");
+        document.getElementById('loadingIcon').style.display = 'block';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken // Send the CSRF token in the headers
+            },
+            body: JSON.stringify({ input: question }) // Send data as JSON
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // alert(data.message); // Handle success (e.g., update the UI)
+                showAgentResponse(data.message);
+            } else {
+                showError('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            showError('Error:', error);
+        });
+    }
+
+    function showMessage(message) {
+        document.getElementById('loadingIcon').style.display = 'none';
+        document.getElementById('info').textContent = message;
+        document.getElementById('errorInfo').textContent = '';
+    }
+
+    function showAgentResponse(message) {
+        document.getElementById('loadingIcon').style.display = 'none';
+        document.getElementById('errorInfo').textContent = '';
+        document.getElementById('info').textContent = '';
+        // document.getElementById('info').textContent = message;
+        showText(document.getElementById('info'), message, 0);
+    }
+
+    let timer;
+    function showText(div, message, index) {
+        if (message.length === index) {
+            clearTimeout(timer)
+            return;
+        }
+
+        div.textContent += message[index];
+        timer = setTimeout(() => {
+            showText(div, message, index + 1);
+        }, 10);
+    }
+
+    function showError(message) {
+        document.getElementById('loadingIcon').style.display = 'none';
+        document.getElementById('info').textContent = '';
+        document.getElementById('errorInfo').textContent = message;
+    }
+
+    function clearQuestion() {
+        document.getElementById('question').value = '';
+        document.getElementById('loadingIcon').style.display = 'none';
+        document.getElementById('errorInfo').textContent = '';
+        document.getElementById('info').textContent = '';
+    }
+</script>
+
+{% else %}
+    <div style="text-align: center;">
+        <h1>Event Scheduler</h1>
+        <li><a href="/api-auth/login/?next={{ request.path }}">Login</a></li>
+        <!-- <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li> -->
+    </div>
+{% endif %}
+
+{% endblock %}

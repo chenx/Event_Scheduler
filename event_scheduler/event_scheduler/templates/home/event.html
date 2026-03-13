@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div>
+    <a href="/service/events/">Back to event list</a>
+</div>
+
+<h1>Event</h1>
+
+<table>
+    <tbody>
+        <tr>
+            <td>Title:</td>
+            <td>{{ title }}</td>
+        </tr>
+        <tr>
+            <td>Time:</td>
+            <td>{{ start_time }}-{{ end_time }}</td>
+        </tr>
+        <tr><td colspan=""2>&nbsp;</td></tr>
+        <tr>
+            <td colspan="2">{{ description }}</td>
+        </tr>
+    </tbody>
+</table>
+
+
+{% else %}
+    <div style="text-align: center;">
+        <h1>Event Scheduler</h1>
+        <li><a href="/api-auth/login/?next={{ request.path }}">Login</a></li>
+        <!-- <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li> -->
+    </div>
+{% endif %}
+
+{% endblock %}
