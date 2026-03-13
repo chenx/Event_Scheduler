@@ -31,7 +31,7 @@ Created using https://dbdiagram.io
 </kbd>
 
 ### 2) agent/agent2: Ask me anything (v2)
-This is an AI agent powered by OpenAI API.
+This is a conversational AI agent powered by OpenAI API. It logs the result to the datastore table below.
 <kbd>
 <img width="889" height="339" alt="image" src="https://github.com/user-attachments/assets/0c6d0f22-a171-43f1-8f78-b2b4fb56c372" />
 </kbd>
