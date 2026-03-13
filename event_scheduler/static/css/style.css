@@ -52,5 +52,32 @@ body {
 }
 
 .login-form-div {
-    height: 30px;
+    height: 40px;
+}
+
+.signup-form-div {
+    width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 20px;
+    padding: 0 20px 20px 20px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    margin-top: 30px;
+}
+
+.signup-form-textbox {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+
+.grid-div {
+    background: url("/static/image/grid.png") repeat-x;
+    background-attachment: fixed;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
