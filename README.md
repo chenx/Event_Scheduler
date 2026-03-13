@@ -31,6 +31,7 @@ Created using https://dbdiagram.io
 </kbd>
 
 ### 2) agent/agent2: Ask me anything (v2)
+This is an AI agent powered by OpenAI API.
 <kbd>
 <img width="889" height="339" alt="image" src="https://github.com/user-attachments/assets/0c6d0f22-a171-43f1-8f78-b2b4fb56c372" />
 </kbd>
@@ -43,4 +44,9 @@ Created using https://dbdiagram.io
 ### 4) events
 <kbd>
 <img width="903" height="363" alt="image" src="https://github.com/user-attachments/assets/13ded703-f423-4478-a6e3-2a6a62b03bb3" />
+</kbd>
+
+### 5) api/events
+<kbd>
+<img width="902" height="652" alt="image" src="https://github.com/user-attachments/assets/0e7dfd3b-2d76-4bc8-99bd-895069b27d1c" />
 </kbd>
