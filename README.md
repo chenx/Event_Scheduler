@@ -47,6 +47,7 @@ This is a conversational AI agent powered by OpenAI API. It logs the result to t
 </kbd>
 
 ### 5) api/events
+This is a RESTful API end point for GET and POST.
 <kbd>
 <img width="902" height="652" alt="image" src="https://github.com/user-attachments/assets/0e7dfd3b-2d76-4bc8-99bd-895069b27d1c" />
 </kbd>
