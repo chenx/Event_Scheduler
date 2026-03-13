@@ -1,6 +1,6 @@
 # Python_Django_demo3
 
-A Django project to demo the creation of models and APIs in a meeting scheduler.
+A Django project to demo the creation of models and APIs in a meeting scheduler. It's extended to demo other functions as well, including AI agent.
 
 Use Django REST Framework (DRF) to provide API end points.
 
