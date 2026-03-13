@@ -1,4 +1,6 @@
 # This agenst asks for user questions in a loop, finds the answer and post to a webhook API end point.
+# This removed the use of deprecated ConversationBufferMemory from langchain_classic.agents,
+# and uses create_agent from langchain instead of create_react_agent from langchain_classic.
 # X.C.
 # Last updated: 3/12/2026
 
