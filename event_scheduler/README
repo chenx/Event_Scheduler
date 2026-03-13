@@ -1,8 +1,6 @@
-A Django project to demo the creation of models and APIs in the meeting scheduler project.
+A Django project to demo the creation of models and APIs in a meeting scheduler.
 
-Please see the last section "Appendix. Attached Django code and screenshots" in the design doc.
-
-Env:
+Environment:
 - Python 3.14.2
 - DJango 6.0
 
