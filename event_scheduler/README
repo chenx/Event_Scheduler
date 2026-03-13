@@ -25,3 +25,5 @@ python manage.py loaddata data.json
 Create new app:
 python manage.py startapp app_name
 
+Access sqlite3 database:
+sqlite3 db.sqlite3
