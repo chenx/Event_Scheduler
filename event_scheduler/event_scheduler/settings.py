@@ -20,17 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-heva55fkiqb9wb*7**irz+n-2u&&wj9j1^x4yzc#y$t8lgbp=e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 
-                 'renaldo-undemonstrational-gullably.ngrok-free.dev']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000',
-                        'https://renaldo-undemonstrational-gullably.ngrok-free.dev/']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000']
 
 # Correctly configure SSL/HTTPS with proxies: If using Nginx, Ngrok or other reverse proxies with SSL, 
 # you may need specific configurations (like SECURE_PROXY_SSL_HEADER) to ensure Django knows the request 
