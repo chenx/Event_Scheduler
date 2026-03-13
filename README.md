@@ -10,7 +10,7 @@ The schema design includes a new field “phone” in the User table, so we need
 
 
 Environment:
-- Python 3.14.2
+- Python 3.13.1
 - DJango 6.0
 
 ## High level flowchart
