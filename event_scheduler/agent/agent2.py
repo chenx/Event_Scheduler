@@ -200,7 +200,7 @@ class AgentExecutor():
                 if 'Observation' in data:            
                     return data['Observation']
 
-                return '(no data is returned)'
+                return '(null)'
 
         except Exception as e:
             # print(f"execute_agent error: {e}")
