@@ -2,7 +2,7 @@
 
 A Django web application project started as an event scheduler and extended to demo other features.
 
-Demos the creation of database models, creation and consumption of RESTful APIs, and creation of AI agents.
+Demos the creation of database models, creation and consumption of RESTful APIs, and creation of AI agents/workflows.
 
 Use Django REST Framework (DRF) to provide API end points.
 
