@@ -41,7 +41,7 @@ This is a conversational AI agent powered by OpenAI API. It logs the result to t
 </kbd>
 
 ### 4) service/events
-This retrieves data from remote API and displays the data in a table. Clicking on "Save to database" saves to datastore table above.
+This retrieves data from remote API and displays the data in a table.
 <kbd>
 <img width="902" height="356" alt="image" src="https://github.com/user-attachments/assets/d7221f02-61e4-4544-a888-d57f7c623f2c" />
 </kbd>
