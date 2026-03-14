@@ -14,6 +14,7 @@ from langchain_classic.memory import ConversationBufferMemory
 import requests
 from ddgs import DDGS
 from datetime import datetime
+import readline # enables history when pressing up/down arrow keys for "input" function.
 
 WEBHOOK_URL = "http://127.0.0.1:8000/service/datastores/"
 

@@ -16,6 +16,7 @@ import json
 import requests
 from ddgs import DDGS
 from datetime import datetime
+import readline # enables history when pressing up/down arrow keys for "input" function.
 
 set_verbose(True)
 # set_debug(True)
