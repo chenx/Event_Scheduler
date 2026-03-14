@@ -227,7 +227,7 @@ def execute_agent():
             elif 'Observation' in data:            
                 print(f"\n{data['Observation']}")
             else:
-                print(f"\n(no data is returned)")
+                print(f"\n(null)")
 
     except Exception as e:
         print(f"execute_agent error: {e}")
