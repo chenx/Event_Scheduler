@@ -32,11 +32,8 @@ class WebhookCallbackHandler(BaseCallbackHandler):
         self, serialized: dict[str, any], inputs: dict[str, any], run_id, parent_run_id, **kwargs: any
     ) -> None:
         """Run when chain starts to capture the initial input."""
-        # Typically the input is under a key like 'input' or 'question'
-        # inputs: {'input': 'Who is obama?', 'chat_history': ''}
-        # print(f"inputs: {inputs}, input: {inputs['input']}")
         if not parent_run_id == None:
-            # {'messages': [HumanMessage(content='who is obama', additional_kwargs={}, response_metadata={}, id='...')]}
+            # {'messages': [HumanMessage(content='...', additional_kwargs={}, response_metadata={}, id='...')]}
             return
         
         try:
@@ -47,7 +44,7 @@ class WebhookCallbackHandler(BaseCallbackHandler):
 
     def on_chain_end(self, outputs, parent_run_id=None, **kwargs):
         if not parent_run_id is None:
-            # {'messages': [HumanMessage(content='who is obama', additional_kwargs={}, response_metadata={}, id='...')]}
+            # {'messages': [HumanMessage(content='...', additional_kwargs={}, response_metadata={}, id='...')]}
             return
         
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -69,6 +66,9 @@ class WebhookCallbackHandler(BaseCallbackHandler):
 
 
 class WeatherTool(BaseTool):
+    """
+    Check the weather of a city.
+    """
     name: str = "WeatherAPI"
     description: str = "Get current weather for a city"
 
@@ -93,6 +93,9 @@ class WeatherTool(BaseTool):
 
 
 class EventTool(BaseTool):
+    """
+    Get events in local database.
+    """
     name: str = "EventAPI"
     description: str = "Get events"
 
@@ -103,6 +106,9 @@ class EventTool(BaseTool):
 
 
 class SearchTool(BaseTool):
+    """
+    Search online for information.
+    """
     name: str = "WebSearch"
     description: str = "Search the web for recent information"
 
@@ -115,6 +121,9 @@ class SearchTool(BaseTool):
 
 
 class NoOpTool(BaseTool):
+    """
+    The fallback tool when other tools cannot be used.
+    """
     name: str = "noop"
     description: str = "Fallback tool when LLM output is invalid"
 
@@ -126,9 +135,6 @@ class NoOpTool(BaseTool):
 
 
 tools = [SearchTool(), EventTool(),WeatherTool(), NoOpTool()]
-
-# https://smith.langchain.com/hub/hwchase17/react
-# prompt = hub.pull("hwchase17/react")
 
 # Create a proper ReAct prompt
 # Must include {input} and {agent_scratchpad}
@@ -142,10 +148,6 @@ Observation: <result from tool as a single string>
 
 If you cannot proceed, stop and give this as a JSON message:
 
-Thought: <what you are thinking>
-Action: <tool name>
-Action Input: <tool input>
-Observation: <your answer>
 Final Answer: <your answer>
 
 Available tools:
@@ -157,12 +159,10 @@ Question: {input}
 {agent_scratchpad}
 """
 
-prompt = PromptTemplate.from_template(react_prompt_template)
-webhook_handler = WebhookCallbackHandler()
 llm = ChatOpenAI(
     model="gpt-4o-mini",
     # model="gpt-4.1",
-    temperature=0.7  # <-- set your temperature here
+    temperature=0.7
 )
 
 agent = create_agent(
@@ -173,8 +173,9 @@ agent = create_agent(
     system_prompt=react_prompt_template,
     checkpointer=InMemorySaver()
 )
+
 agent = agent.with_config(
-    {"callbacks": [webhook_handler]}
+    {"callbacks": [WebhookCallbackHandler()]}
 )
 
 
@@ -190,12 +191,17 @@ class AgentExecutor():
             outputs = result["messages"][-1].content if result.get("messages") else None
             # print(response)
             if outputs is None:
-                # print("\n(None)")
                 return "(none)"
             else:
                 data = json.loads(outputs)
-                # print(f"\n{data['Observation']}")
-                return data['Observation']
+                if 'Final Answer' in data:
+                    return data['Final Answer']
+
+                if 'Observation' in data:            
+                    return data['Observation']
+
+                return '(no data is returned)'
+
         except Exception as e:
             # print(f"execute_agent error: {e}")
             return f"execute_agent error: {e}"
@@ -216,7 +222,13 @@ def execute_agent():
             print("\n(None)")
         else:
             data = json.loads(outputs)
-            print(f"\n{data['Observation']}")
+            if 'Final Answer' in data:
+                print(f"\n{data['Final Answer']}")
+            elif 'Observation' in data:            
+                print(f"\n{data['Observation']}")
+            else:
+                print(f"\n(no data is returned)")
+
     except Exception as e:
         print(f"execute_agent error: {e}")
 

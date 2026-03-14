@@ -38,7 +38,7 @@ def test(request):
 
 def datastore(request):
     data_store = DataStore.objects.all()
-    print(f"DataStore all_items: {data_store}")
+    # print(f"DataStore all_items: {data_store}")
     for item in data_store:
         print(item.id)
 
@@ -126,7 +126,6 @@ def save_data_view(request):
         except Exception as e:
             return HttpResponseBadRequest(f'Error: {e}')
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
-
 
 
 @csrf_exempt # Use this decorator or other CSRF handling methods
