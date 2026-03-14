@@ -6,7 +6,7 @@ Demos the creation of database models, creation and consumption of RESTful APIs,
 
 Use Django REST Framework (DRF) to provide API end points.
 
-User needs to log in to access personal homepage, API end points and AI agents.
+User needs to log in to access personal homepage, RESTful API end points and AI agents.
 
 Environment:
 - Python 3.13.1
