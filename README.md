@@ -1,6 +1,6 @@
 # Python_Django_demo3
 
-A Django web application project started as an event scheduler and extended to demo other features.
+A Django web application project started as an event scheduler and extended to demo other functions.
 
 Demos the creation of database models, creation and consumption of RESTful APIs, and creation of AI agents/workflows.
 
