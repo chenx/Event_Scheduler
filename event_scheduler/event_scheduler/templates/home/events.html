@@ -16,7 +16,7 @@
     <h1>Events</h1>
 {% endif %}
 
-From API end point: <a href="https://renaldo-undemonstrational-gullably.ngrok-free.dev/api/events/" target="_new">/api/events/</a>
+From API end point: <a href="#" onclick="openApiUrl(); return false;" target="_new">/api/events/</a>
 
 <table class="event-table">
     <thead>
@@ -100,6 +100,12 @@ From API end point: <a href="https://renaldo-undemonstrational-gullably.ngrok-fr
         .catch(error => {
             alert('Error:', error);
         });
+    }
+
+    function openApiUrl() {
+        const loc = window.location;
+        const url = loc.protocol + '//' + loc.host + '/api/events/';
+        window.open(url, '_new')
     }
 
 </script>
