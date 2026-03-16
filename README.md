@@ -29,6 +29,7 @@ The schema design includes a new field “phone” in the User table, so we need
 
 ### 1) homepage
 <kbd>
+<img width="900" height="686" alt="image" src="https://github.com/user-attachments/assets/51e4a3e8-2800-4aa2-9a6d-1adf401b14de" />
 <img width="883" height="675" alt="image" src="https://github.com/user-attachments/assets/1ffddb67-a2a5-4bd3-8034-7ee0bf36d210" />
 </kbd>
 
