@@ -30,13 +30,12 @@ The schema design includes a new field “phone” in the User table, so we need
 ### 1) homepage
 <kbd>
 <img width="900" height="686" alt="image" src="https://github.com/user-attachments/assets/51e4a3e8-2800-4aa2-9a6d-1adf401b14de" />
-<img width="883" height="675" alt="image" src="https://github.com/user-attachments/assets/1ffddb67-a2a5-4bd3-8034-7ee0bf36d210" />
 </kbd>
 
 ### 2) agent/agent2: Ask me anything (v2)
 This is a conversational AI agent powered by OpenAI API. It logs the result to the datastore table below.
 <kbd>
-<img width="889" height="339" alt="image" src="https://github.com/user-attachments/assets/0c6d0f22-a171-43f1-8f78-b2b4fb56c372" />
+<img width="903" height="349" alt="image" src="https://github.com/user-attachments/assets/127ba0ff-ea8d-46a2-a3d2-e4937fa24bb4" />
 </kbd>
 
 ### 3) datastore
