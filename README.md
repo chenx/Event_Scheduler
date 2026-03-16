@@ -46,7 +46,7 @@ This is a conversational AI agent powered by OpenAI API. It logs the result to t
 ### 4) service/events
 This retrieves data from remote API and displays the data in a table.
 <kbd>
-<img width="902" height="356" alt="image" src="https://github.com/user-attachments/assets/d7221f02-61e4-4544-a888-d57f7c623f2c" />
+  <img width="903" height="358" alt="image" src="https://github.com/user-attachments/assets/02a6eeeb-6859-4f5c-8ecd-9d1c75e0a7a4" />
 </kbd>
 
 ### 5) api/events
