@@ -1,4 +1,4 @@
-# Python_Django_demo3
+# Event Schedulre (Python/Django)
 
 A Django web application project started as an event scheduler and extended to demo other functions.
 
